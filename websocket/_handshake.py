@@ -22,6 +22,7 @@ Copyright (C) 2010 Hiroki Ohtani(liris)
 import hashlib
 import hmac
 import os
+import logging
 
 import six
 
@@ -73,6 +74,8 @@ def handshake(sock, hostname, port, resource, **options):
     headers, key = _get_handshake_headers(resource, hostname, port, options)
 
     header_str = "\r\n".join(headers)
+    logging.debug("Websocket handshake: %s" % header_str)
+
     send(sock, header_str)
     dump("request header", header_str)
 
